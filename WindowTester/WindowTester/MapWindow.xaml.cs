@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WindowTester
+namespace HIMTools
 {
     /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
+    /// MapWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MapWindow : Window
     {
-        public MainWindow()
+        public MapWindow()
         {
             InitializeComponent();
         }

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{762191C7-7D98-4987-8472-DD096C0654D0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WindowTester</RootNamespace>
+    <RootNamespace>HIMTools</RootNamespace>
     <AssemblyName>WindowTester</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -51,11 +51,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Controls\DockPanel.cs" />
+    <Compile Include="Controls\Grid.cs" />
+    <Compile Include="Controls\TabControl.cs" />
+    <Compile Include="Windows\MainPanel.cs" />
+    <Compile Include="Windows\Ribbons\RibbonContainer.cs" />
+    <Compile Include="Windows\TabSystem\ITabPages.cs" />
+    <Compile Include="Windows\TabSystem\QuadTabControl.cs" />
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,12 +66,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="MapWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapWindow.xaml.cs">
+      <DependentUpon>MapWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
