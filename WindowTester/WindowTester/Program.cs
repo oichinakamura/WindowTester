@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Windows;
 
 namespace HIMTools
 {
-    public class Program
+    using HIMTools.AppSystem;
+    public static class Program
     {
-        [STAThread] // WPFアプリケーションには必須
+        public static SystemAD SysAD { get; private set; }
+
+        [STAThread]
         public static void Main()
         {
+            SysAD = new SystemAD();
+
             App app = new App();
             app.InitializeComponent();
             app.Run();

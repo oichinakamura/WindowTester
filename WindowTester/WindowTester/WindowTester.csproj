@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -24,6 +25,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,13 +54,73 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\Canvas.cs">
+      <Link>Common\Controls\Canvas.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\ControlsRelocation.cs">
+      <Link>Common\Controls\ControlsRelocation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\IWPFControls.cs">
+      <Link>Common\Controls\IWPFControls.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\QuadTabControl.cs">
+      <Link>Common\Controls\QuadTabControl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\StatusBar.cs">
+      <Link>Common\Controls\StatusBar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\MapTools\RasterContentLib\RasterContentControl.cs">
+      <Link>Common\MapTools\RasterContentControl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Windows\MainPanel.cs">
+      <Link>Common\Windows\MainPanel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Interface\INotifyPropertySet.cs">
+      <Link>LIB\Interface\INotifyPropertySet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Xml\IMetaElement.cs">
+      <Link>LIB\Xml\IMetaElement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Xml\XeDocument.cs">
+      <Link>LIB\Xml\XeDocument.cs</Link>
+    </Compile>
+    <Compile Include="Applications\ApplicationBase.cs" />
+    <Compile Include="Applications\ApplicationCollection.cs" />
+    <Compile Include="AppSystem\SystemConfig.cs" />
+    <Compile Include="Common\Controls\Border.cs" />
+    <Compile Include="Common\Controls\Button.cs" />
+    <Compile Include="Common\Controls\ComboBox.cs" />
+    <Compile Include="Common\Controls\DataGrid.cs" />
+    <Compile Include="Common\Controls\GridLayoutPanel.cs" />
+    <Compile Include="Common\Controls\HasEventUIElementCollection.cs" />
+    <Compile Include="Common\Controls\ListView.cs" />
+    <Compile Include="Common\Controls\ScrollBar.cs" />
+    <Compile Include="Common\Controls\StackPanel.cs" />
+    <Compile Include="Common\Controls\TextBlock.cs" />
+    <Compile Include="Controls\Canvas.cs" />
     <Compile Include="Controls\DockPanel.cs" />
     <Compile Include="Controls\Grid.cs" />
+    <Compile Include="Controls\ScrollBar.cs" />
     <Compile Include="Controls\TabControl.cs" />
+    <Compile Include="Controls\TextBox.cs" />
+    <Compile Include="Input\InputController.cs" />
+    <Compile Include="Interface\IOperationTarget.cs" />
+    <Compile Include="MapTools\CursorModePanel.cs" />
+    <Compile Include="MapTools\MapControl.cs" />
+    <Compile Include="MapTools\MapViewer.cs" />
+    <Compile Include="MapTools\OperationTarget.cs" />
+    <Compile Include="MapTools\RasterContentLib\RasterContentControl.cs" />
+    <Compile Include="MapTools\RasterContentLib\VectorDrawingVisual.cs" />
+    <Compile Include="MapTools\VisualLayerCollection.cs" />
+    <Compile Include="ShapeDoc\ShapeDocument.cs" />
+    <Compile Include="SharedObjects\ApplicationTOOL001.cs" />
+    <Compile Include="SharedObjects\SharedOperationTarget.cs" />
+    <Compile Include="SystemADSK.cs" />
+    <Compile Include="AppSystem\SystemAD.cs" />
     <Compile Include="Windows\MainPanel.cs" />
     <Compile Include="Windows\Ribbons\RibbonContainer.cs" />
     <Compile Include="Windows\TabSystem\ITabPages.cs" />
-    <Compile Include="Windows\TabSystem\QuadTabControl.cs" />
+    <Compile Include="Controls\QuadTabControl.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,5 +164,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

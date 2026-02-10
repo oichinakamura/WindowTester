@@ -7,5 +7,16 @@
         xmlns:TabSystem="clr-namespace:HIMTools.Windows.TabSystem" x:Class="HIMTools.MapWindow"
         mc:Ignorable="d"
         Title="MapWindow" Height="450" Width="800">
-    <Windows:MainPanel />
+    <Border>
+        <DockPanel x:Name="ChromeBorder">
+            <DockPanel x:Name="TitleBar" DockPanel.Dock="Top">
+                <Border x:Name="MainContainer">
+                    <Grid>
+                        <Windows:MainPanel QuadTabOwner="{Binding QuadOwner}"/>
+                        <Grid x:Name="SmakeScreen" Visibility="Collapsed"/>
+                    </Grid>
+                </Border>
+            </DockPanel>
+        </DockPanel>
+    </Border>
 </Window>

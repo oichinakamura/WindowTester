@@ -3,25 +3,39 @@ namespace HIMTools.Windows
 {
     using HIMTools.Controls;
     using HIMTools.Windows.Ribbons;
-    using HIMTools.Windows.TabSystem;
-    using System.Windows;
+    using System.Windows.Markup;
     using SysCtrl = System.Windows.Controls;
+    using SysWin = System.Windows;
 
-    public class MainPanel : DockPanel, IMainPanel
+
+    public partial class MainPanel : IMainPanel　//Tester用
     {
-        public MainPanel()
+        protected void InitPanel()
         {
-            QuadTabPages = new QuadTabControl();
+
             Ribbons = new RibbonContainer() { Dock = SysCtrl.Dock.Top, MinHeight = 80 };
-            Children.Add(Ribbons as UIElement);
-            Children.Add(QuadTabPages as UIElement);
+            Children.Add(Ribbons as SysWin.UIElement);
+            Children.Add(QuadTabPages as SysWin.UIElement);
         }
 
-        public IQuadTabControl QuadTabPages { get; }
-        public IRibbonContainer Ribbons { get; }
+        public IQuadTabControl QuadTabPages { get; private set; } = new QuadTabControl();
+        public IRibbonContainer Ribbons { get; private set; }
+
+
+        public IQuadTabOwner QuadTabOwner
+        {
+            get => QuadTabPages.QuadTabOwner;
+            set => QuadTabPages.QuadTabOwner = value;
+        }
+        public static readonly SysWin.DependencyProperty QuadTabOwnerProperty = SysWin.DependencyProperty.Register("QuadTabOwner", typeof(IQuadTabOwner), typeof(MainPanel), new SysWin.PropertyMetadata(null, OnQuadTabOwnerChanged));
+        private static void OnQuadTabOwnerChanged(SysWin.DependencyObject d, SysWin.DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as MainPanel;
+            control.QuadTabOwner = e.NewValue as IQuadTabOwner;
+        }
     }
 
-    public interface IMainPanel
+    public partial interface IMainPanel
     {
         IRibbonContainer Ribbons { get; }
         IQuadTabControl QuadTabPages { get; }
