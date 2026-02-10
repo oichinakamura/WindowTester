@@ -36,6 +36,7 @@
             }
             FilePath = fileInfo.FullName;
         }
+
         public Guid ID { get; set; }
         public string FilePath { get; private set; }
 
@@ -173,6 +174,8 @@
                 }
             }
         }
+
+        private IInputController SelectItemController;
     }
 
     public class ShapeDocumentRoot : XeElement
@@ -474,6 +477,34 @@
             set => SetAttribute("Y", $"{value}");
         }
     }
+
+    public class SelectItemController : Input.InputControllerBase
+    {
+        public SelectItemController()
+        {
+        }
+
+        public override void Draw(IVisualLayerCollection visualLayerCollection)
+        {
+            
+        }
+
+        public override void Draw(VectorDrawingVisual vectorDrawingVisual)
+        {
+            
+        }
+
+        public override void PenDown(Point point)
+        {
+            
+        }
+
+        public override void Undo()
+        {
+            
+        }
+    }
+
 
     public class InputPolyLineController : Input.InputControllerBase
     {

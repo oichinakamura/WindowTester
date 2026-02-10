@@ -5,6 +5,7 @@ namespace HIMTools.MapTools
     using HIMTools.Input;
     using HIMTools.MapTools.MapControls.RasterView;
     using System;
+    using System.Windows;
     using Media = System.Windows.Media;
     using SysCtrl = System.Windows.Controls;
     using SysWin = System.Windows;
@@ -63,6 +64,7 @@ namespace HIMTools.MapTools
         {
             Control.SetMapDrawImage();
         }
+
     }
 
 

@@ -23,20 +23,14 @@ namespace HIMTools.Input
         public Cursor Cursor => Cursors.Cross;
 
         public EditDictionary Values { get; private set; }
-
         public IMapInputTarget Owner { get; set; }
-
         public bool IsEnabled { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-
+        public void SendPropertyChanged(params string[] propertyNames) { foreach (string propertyName in propertyNames) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); } }
 
         public abstract void PenDown(Point point);
-        //public virtual void MouseMove(Point point, MapCanvas canvas)
-        //{
-        //}
-        public void SendPropertyChanged(params string[] propertyNames) { foreach (string propertyName in propertyNames) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); } }
+        public virtual void PenMove(Point point) { }
 
         public abstract void Draw(IVisualLayerCollection visualLayerCollection);
 
@@ -44,6 +38,7 @@ namespace HIMTools.Input
 
         public abstract void Undo();
     }
+
     public interface IInputController : INotifyPropertySet
     {
         IMapInputTarget Owner { get; }
@@ -53,9 +48,11 @@ namespace HIMTools.Input
         void Draw(VectorDrawingVisual vectorDrawingVisual);
 
         void PenDown(Point point);
-        Visibility Visibility { get; }
-        bool IsEnabled { get; set; }
+        void PenMove(Point point);
         void Undo();
+
+        bool IsEnabled { get; set; }
+        Visibility Visibility { get; }
     }
 
     public interface IMapInputTarget
