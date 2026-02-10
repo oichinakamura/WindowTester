@@ -48,7 +48,7 @@ namespace HIMTools.MapTools
         protected override void OnRender(DrawingContext dc)
         {
             base.OnRender(dc);
-            SetMapDrawImage();
+            //SetMapDrawImage();
         }
 
         private IMapViewer parentViewer;

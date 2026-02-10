@@ -31,18 +31,10 @@ namespace HIMTools.Input
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        //public virtual void InitController(MapCanvas mapCanvas)
-        //{
-        //    canvas = mapCanvas;
-        //}
 
         public abstract void PenDown(Point point);
         //public virtual void MouseMove(Point point, MapCanvas canvas)
         //{
-        //}
-        //public virtual void RemoveController(MapCanvas canvas)
-        //{
-
         //}
         public void SendPropertyChanged(params string[] propertyNames) { foreach (string propertyName in propertyNames) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); } }
 

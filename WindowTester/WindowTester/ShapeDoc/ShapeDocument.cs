@@ -156,6 +156,12 @@
         {
         }
 
+        public void Save()
+        {
+            Save(FilePath);
+            SendPropertyChanged("Items");
+        }
+
         public void Draw(VectorDrawingVisual vectorDrawingVisual)
         {
             foreach (XeElement element in Items)
@@ -224,8 +230,6 @@
                     }
 
                     vectorDrawingVisual.DrawPolyline(Points.ToArray(), new Pen { Brush = Brushes.Black, Thickness = 1 });
-
-
                     break;
             }
         }
@@ -248,13 +252,13 @@
 
         private object content;
         public object Content =>
-            content is null ? Type switch
-            {
-                "ラベル" => CreateLabelPage(),
-                "ポリライン" => CreatePolyLinePage(),
-                "ポリゴン" => CreatePolygonPage(),
-                _ => null
-            } : content;
+             Type switch
+             {
+                 "ラベル" => CreateLabelPage(),
+                 "ポリライン" => CreatePolyLinePage(),
+                 "ポリゴン" => CreatePolygonPage(),
+                 _ => null
+             };
 
         private object CreateLabelPage()
         {
@@ -431,7 +435,8 @@
                         foreach (string key in inputController.Values.Keys)
                             SetElementValue(key, inputController.Values[key]);
 
-                        OwnerDocument.Save(((ShapeDocument)OwnerDocument).FilePath);
+                        if(OwnerDocument is ShapeDocument shapeDocument)
+                            shapeDocument.Save();
                         MessageBox.Show("保存しました", "保存");
                     }
                     break;
@@ -476,6 +481,8 @@
         {
             Owner = inputTarget;
             Values.Add("Name", Owner.GetElementValue("Name"));
+
+
             foreach (ShapePoint point in points)
                 Points.Add(new Point() { X = point.X, Y = point.Y });
         }
@@ -510,7 +517,7 @@
             if (Points.Count > 0)
             {
                 Points.RemoveAt(Points.Count - 1);
-                Program.SysAD.MapViewer.MapRefresh();   
+                Program.SysAD.MapViewer.MapRefresh();
             }
         }
     }
