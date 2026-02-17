@@ -35,8 +35,34 @@ namespace HIMTools.MapTools
         {
             if (Program.SysAD.MapViewer.InputController is IInputController inputController && inputController.IsEnabled)
                 Program.SysAD.MapViewer.InputController.PenDown(e.GetPosition(this));
+            else if (Program.SysAD.Applications.CurrentTarget != null)
+                if (Program.SysAD.Applications.CurrentTarget.DefaultController != null)
+                    Program.SysAD.Applications.CurrentTarget.DefaultController.PenDown(e.GetPosition(this));
             base.OnPreviewMouseLeftButtonDown(e);
         }
+
+        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        {
+
+            if (Program.SysAD.MapViewer.InputController is IInputController inputController && inputController.IsEnabled)
+                Program.SysAD.MapViewer.InputController.PenMove(e.GetPosition(this), e.LeftButton);
+            else if (Program.SysAD.Applications.CurrentTarget != null)
+                if (Program.SysAD.Applications.CurrentTarget.DefaultController != null)
+                    Program.SysAD.Applications.CurrentTarget.DefaultController.PenMove(e.GetPosition(this), e.LeftButton);
+
+            base.OnPreviewMouseMove(e);
+        }
+
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            if (Program.SysAD.MapViewer.InputController is IInputController inputController && inputController.IsEnabled)
+                Program.SysAD.MapViewer.InputController.PenUp(e.GetPosition(this));
+            else if (Program.SysAD.Applications.CurrentTarget != null)
+                if (Program.SysAD.Applications.CurrentTarget.DefaultController != null)
+                    Program.SysAD.Applications.CurrentTarget.DefaultController.PenUp(e.GetPosition(this));
+            base.OnPreviewMouseUp(e);
+        }
+
 
         public Border MapBorder { get; private set; }
 
@@ -66,11 +92,11 @@ namespace HIMTools.MapTools
                 applicationBase.Draw(vectorDrawingVisual);
             }
 
-            if (Program.SysAD.MapViewer.InputController is IInputController mapViewerInputController)
-                if (mapViewerInputController.Visibility == Visibility.Visible)
-                {
-                    mapViewerInputController.Draw(vectorDrawingVisual);
-                }
+            if (Program.SysAD.MapViewer.InputController is IInputController mapViewerInputController && mapViewerInputController.Visibility == Visibility.Visible)
+                mapViewerInputController.Draw(vectorDrawingVisual);
+            else if (Program.SysAD.Applications.CurrentTarget != null)
+                if (Program.SysAD.Applications.CurrentTarget.DefaultController != null)
+                    Program.SysAD.Applications.CurrentTarget.DefaultController.Draw(vectorDrawingVisual);
 
             vectorDrawingVisual.Close();
 
@@ -82,38 +108,6 @@ namespace HIMTools.MapTools
 
             image.Source = bmpstr;
         }
-
-        private void drawSub(int x, int y, WriteableBitmap bitmap, Color color)
-        {
-            for (int dx = 0; dx <= x; dx++)
-                try
-                {
-                    bitmap.Lock();
-
-                    int bytesPerPixel = (bitmap.Format.BitsPerPixel + 7) / 8;
-                    int stride = bitmap.BackBufferStride;
-
-                    byte[] colorData = { color.B, color.G, color.R, color.A };
-
-                    unsafe
-                    {
-                        byte* pBackBuffer = (byte*)bitmap.BackBuffer;
-                        int offset = (y * stride) + (dx * bytesPerPixel);
-
-                        for (int i = 0; i < colorData.Length; i++)
-                        {
-                            *(pBackBuffer + offset + i) = colorData[i];
-                        }
-                    }
-
-                    bitmap.AddDirtyRect(new Int32Rect(dx, y, 1, 1));
-                }
-                finally
-                {
-                    bitmap.Unlock();
-                }
-        }
-
 
 
         // 描画イメージ作成処理

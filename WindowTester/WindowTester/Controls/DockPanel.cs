@@ -15,6 +15,8 @@ namespace HIMTools.Controls
         public int GridColumn { get => Grid.GetColumn(this); set => Grid.SetColumn(this, value); }
         public int GridRow { get => Grid.GetRow(this); set => Grid.SetRow(this, value); }
 
+        public SysCtrl.Dock Dock { get => GetDock(this); set => SetDock(this, value); }
+
         public void Docking(SysWin.UIElement element, SysCtrl.Dock? dock = null)
         {
             if (dock.HasValue)

@@ -24,6 +24,20 @@ namespace HIMTools.MapTools
 
             var body = new DockPanel();
 
+
+            var TopPanel = new DockPanel()
+            {
+                Dock = SysCtrl.Dock.Top,
+                Children =
+                {
+                    new Button(){ BorderThickness = new Thickness(0), Content="≡", Background = Media.Brushes.Transparent  },
+                    new TextBox(){ BorderThickness = new Thickness(0,0,0,1), MinWidth=80,Margin=new Thickness(2) },
+                    new Button(){ BorderThickness = new Thickness(0), Content="検索", Background = Media.Brushes.Transparent  },
+                    new Border()
+                },
+            };
+            body.Children.Add(TopPanel);
+
             body.Children.Add(scrollH);
             body.Children.Add(scrollV);
 
@@ -89,6 +103,8 @@ namespace HIMTools.MapTools
         public object Content { get; set; }
 
         public Guid ID { get; } = Guid.NewGuid();
+
+        public object TabHeader => "地図zzz";
     }
 
 }

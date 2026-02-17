@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 
 namespace HIMTools.MapTools.RasterContentLib
 {
@@ -26,11 +27,21 @@ namespace HIMTools.MapTools.RasterContentLib
         {
             dc.DrawLine(pen, new System.Windows.Point(X1, Y1), new System.Windows.Point(X2, Y2));
         }
+        public void DrawRectangle(double X1, double Y1, double X2, double Y2, Pen pen)
+        {
+            var x = Math.Min(X1, X2);
+            var y = Math.Min(Y1, Y2);
+
+            var w = Math.Abs(X2 - X1);
+            var h = Math.Abs(Y2 - Y1);
+
+            dc.DrawRectangle(null, pen, new System.Windows.Rect(x, y, w, h));
+        }
 
         public void DrawPolyline(System.Windows.Point[] points, Pen pen)
         {
-            for(int n=1;points.Length>n;n++)
-            dc.DrawLine(pen, new System.Windows.Point(points[n-1].X, points[n - 1].Y), new System.Windows.Point(points[n].X, points[n].Y));
+            for (int n = 1; points.Length > n; n++)
+                dc.DrawLine(pen, new System.Windows.Point(points[n - 1].X, points[n - 1].Y), new System.Windows.Point(points[n].X, points[n].Y));
         }
 
     }

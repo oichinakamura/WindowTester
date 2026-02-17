@@ -69,6 +69,9 @@
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\StatusBar.cs">
       <Link>Common\Controls\StatusBar.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\HTTP\HTTPClient.cs">
+      <Link>Common\HTTP\HTTPClient.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\MapTools\RasterContentLib\RasterContentControl.cs">
       <Link>Common\MapTools\RasterContentControl.cs</Link>
     </Compile>

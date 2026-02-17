@@ -1,15 +1,13 @@
-﻿using HIMTools.MapTools;
+﻿using HIMTools.Input;
+using HIMTools.MapTools;
 using HIMTools.MapTools.RasterContentLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIMTools.Interface
 {
     public interface IOperationTarget
     {
+
+        IInputController DefaultController { get; }
         void Draw(IVisualLayerCollection visualLayers);
         void Draw(VectorDrawingVisual vectorDrawingVisual);
     }

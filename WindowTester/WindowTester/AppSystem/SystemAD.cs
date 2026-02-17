@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.ObjectModel;
-
-namespace HIMTools.AppSystem
+﻿namespace HIMTools.AppSystem
 {
     using HIMTools.Applications;
     using HIMTools.Controls;
@@ -54,6 +51,7 @@ namespace HIMTools.AppSystem
 
         public void SendPropertyChanged(params string[] propertyNames) { foreach (string propertyName in propertyNames) PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
     }
+
     public class TabDumy : ITabPage
     {
         public object Header => "Dumy";
@@ -61,5 +59,7 @@ namespace HIMTools.AppSystem
         public object Content => null;
 
         public Guid ID { get; } = Guid.NewGuid();
+
+        public object TabHeader => Header;
     }
 }

@@ -35,13 +35,14 @@
                 Save(fileInfo.FullName);
             }
             FilePath = fileInfo.FullName;
+            DefaultController = new SelectItemController(this);
         }
 
         public Guid ID { get; set; }
         public string FilePath { get; private set; }
 
         public object Header => FilePath.IndexOf('\\') > 0 ? FilePath.Substring(FilePath.LastIndexOf('\\') + 1) : FilePath;
-
+        public object TabHeader => Header;
         public object Icon => "📒";
         private object content;
 
@@ -126,6 +127,8 @@
             }
         }
 
+        public IInputController DefaultController { get; private set; }
+
         public void Execute(object parameter)
         {
             switch (parameter)
@@ -175,7 +178,7 @@
             }
         }
 
-        private IInputController SelectItemController;
+        //private IInputController SelectItemController;
     }
 
     public class ShapeDocumentRoot : XeElement
@@ -244,6 +247,7 @@
         public override Guid ID { get => HasAttribute("ID") ? base.ID : CreateID(); set => base.ID = value; }
         public Guid CreateID() { SetAttribute("ID", Guid.NewGuid()); return base.ID; }
         public object Header => Title;
+        public object TabHeader => Title;
 
         public object Icon => Type switch
         {
@@ -330,10 +334,13 @@
                         {
                             AutoGenerateColumns = false,
                             Columns={
-                                new SysCtrl.DataGridTextColumn(){ Header="座標X",Binding=new Binding("X") },
-                                new SysCtrl.DataGridTextColumn(){ Header="座標Y",Binding=new Binding("Y") }
+                                new DataGridTextColumn(){ Header="座標X",HorizontalContentAlignment=HorizontalAlignment.Right,Binding = new Binding("X"){ StringFormat = "{0:F3}" } },
+                                new DataGridTextColumn(){ Header="座標Y",HorizontalContentAlignment=HorizontalAlignment.Right,Binding = new Binding("Y"){ StringFormat = "{0:F3}" } }
                             },
-                            ItemsSource=(inputController as InputPolyLineController).Points
+                            Bindings = {BindingTuple.Create(
+                                Property: DataGrid.ItemsSourceProperty,
+                                Path: "Points",
+                                Source:(InputPolyLineController)inputController) },
                         },
                 }
             };
@@ -438,7 +445,7 @@
                         foreach (string key in inputController.Values.Keys)
                             SetElementValue(key, inputController.Values[key]);
 
-                        if(OwnerDocument is ShapeDocument shapeDocument)
+                        if (OwnerDocument is ShapeDocument shapeDocument)
                             shapeDocument.Save();
                         MessageBox.Show("保存しました", "保存");
                     }
@@ -457,9 +464,6 @@
 
         public void SendPropertyChanged(params string[] propertyNames) { foreach (string propertyName in propertyNames) PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
     }
-
-
-
 
     public class ShapePoint : XeElement
     {
@@ -480,28 +484,52 @@
 
     public class SelectItemController : Input.InputControllerBase
     {
-        public SelectItemController()
+        public SelectItemController(ShapeDocument document)
         {
         }
 
         public override void Draw(IVisualLayerCollection visualLayerCollection)
         {
-            
+
         }
 
         public override void Draw(VectorDrawingVisual vectorDrawingVisual)
         {
-            
+            if (StartPos.HasValue && SecondPos.HasValue)
+                vectorDrawingVisual.DrawRectangle(StartPos.Value.X, StartPos.Value.Y, SecondPos.Value.X, SecondPos.Value.Y, new Pen() { Brush = Brushes.Red });
         }
 
+        private Point? StartPos;
         public override void PenDown(Point point)
         {
-            
+            StartPos = point;
+        }
+
+        private Point? SecondPos;
+        public override void PenMove(Point point, MouseButtonState LeftButton)
+        {
+            if (StartPos.HasValue && LeftButton == MouseButtonState.Pressed)
+            {
+                SecondPos = point;
+                Program.SysAD.MapViewer.MapRefresh();
+            }
+
+        }
+
+        public override void PenUp(Point point)
+        {
+            if (StartPos.HasValue)
+            {
+                StartPos = null;
+                SecondPos = null;
+                Program.SysAD.MapViewer.MapRefresh();
+            }
+            base.PenUp(point);
         }
 
         public override void Undo()
         {
-            
+
         }
     }
 
@@ -513,12 +541,11 @@
             Owner = inputTarget;
             Values.Add("Name", Owner.GetElementValue("Name"));
 
-
             foreach (ShapePoint point in points)
                 Points.Add(new Point() { X = point.X, Y = point.Y });
         }
 
-        public ObservableCollection<Point> Points = new ObservableCollection<Point>();
+        public ObservableCollection<Point> Points { get; } = new ObservableCollection<Point>();
         public override void Draw(IVisualLayerCollection visualLayerCollection)
         {
         }

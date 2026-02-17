@@ -1,14 +1,12 @@
 ﻿namespace HIMTools.Controls
 {
-    using System.Collections;
-    using SysCtrl = System.Windows.Controls;
-    using SysWin = System.Windows;
-    using SysData = System.Windows.Data;
+    using System;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
-    using System.Runtime.InteropServices;
-    using System;
     using System.ComponentModel;
+    using SysCtrl = System.Windows.Controls;
+    using SysData = System.Windows.Data;
+    using SysWin = System.Windows;
 
     public partial class QuadTabControl : IQuadTabControl
     {
@@ -132,7 +130,7 @@
     {
         public T Add<T>(ITabPage tabPage, bool select = false)
         {
-            base.Add(tabPage);
+            base.Add((ITabPage)tabPage);
             if (select)
                 SelectedTab = tabPage;
             return (T)tabPage;
@@ -184,11 +182,5 @@
         //ITabPage SelectedR1 { get; set; }
     }
 
-    public interface ITabPage
-    {
-        Guid ID { get; }
-        object Header { get; }
-        object Icon { get; }
-        object Content { get; }
-    }
+
 }

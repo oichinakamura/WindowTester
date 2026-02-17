@@ -18,6 +18,7 @@ namespace HIMTools.AppSystem
         }
 
         public override object Header => "SystemConfig";
+        public override object TabHeader => "SystemConfig";
         public override object Icon => "≡";
 
         public override object Content
@@ -78,6 +79,7 @@ namespace HIMTools.AppSystem
                         if (saveFileDialog.ShowDialog() == true)
                         {
                             var newDoc = new ShapeDoc.ShapeDocument(new System.IO.FileInfo(saveFileDialog.FileName));
+                         
                             if (newDoc != null)
                             {
                                 var newFile = UsedFiles.AddUsedFile(saveFileDialog.FileName);
@@ -143,6 +145,7 @@ namespace HIMTools.AppSystem
                 var shapeDoc = new ShapeDoc.ShapeDocument(new System.IO.FileInfo(Path));
                 shapeDoc.ID = ID;
                 Program.SysAD.Tool001.OperationTargets.Add(shapeDoc);
+                Program.SysAD.Applications.CurrentTarget = shapeDoc;
                 Program.SysAD.QuadTabPages.R1.Add<ITabPage>(shapeDoc,true);
                 Program.SysAD.MapViewer.MapRefresh();
             }
@@ -158,5 +161,7 @@ namespace HIMTools.AppSystem
         public virtual object Header => throw new NotImplementedException();
         public virtual object Icon => throw new NotImplementedException();
         public virtual object Content { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public virtual object TabHeader => throw new NotImplementedException();
     }
 }

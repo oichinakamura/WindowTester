@@ -30,13 +30,14 @@ namespace HIMTools.Input
         public void SendPropertyChanged(params string[] propertyNames) { foreach (string propertyName in propertyNames) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); } }
 
         public abstract void PenDown(Point point);
-        public virtual void PenMove(Point point) { }
-
+        public virtual void PenMove(Point point, MouseButtonState LeftButton) { }
+        public virtual void PenUp(Point point) { }
         public abstract void Draw(IVisualLayerCollection visualLayerCollection);
 
         public abstract void Draw(VectorDrawingVisual vectorDrawingVisual);
 
         public abstract void Undo();
+
     }
 
     public interface IInputController : INotifyPropertySet
@@ -48,7 +49,8 @@ namespace HIMTools.Input
         void Draw(VectorDrawingVisual vectorDrawingVisual);
 
         void PenDown(Point point);
-        void PenMove(Point point);
+        void PenMove(Point point, MouseButtonState LeftButton);
+        void PenUp(Point point);
         void Undo();
 
         bool IsEnabled { get; set; }
@@ -66,7 +68,7 @@ namespace HIMTools.Input
     {
         public EditDictionary(INotifyPropertySet owner)
         {
-            Owner= owner;
+            Owner = owner;
         }
         private INotifyPropertySet Owner;
         public new object this[string Key]

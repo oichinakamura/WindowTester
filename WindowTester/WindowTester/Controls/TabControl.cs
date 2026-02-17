@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,19 +31,19 @@ namespace HIMTools.Controls
                 iconFactory.SetBinding(TextBlock.TextProperty, new Binding("Icon"));
 
 
-                var textBlockFactory = new FrameworkElementFactory(typeof(ContentPresenter));
-                textBlockFactory.SetBinding(ContentPresenter.ContentProperty, new Binding("Header"));
-                textBlockFactory.SetValue(TextBlock.BackgroundProperty, Brushes.Transparent);
-                textBlockFactory.SetValue(TextBlock.PaddingProperty, new Thickness(5));
+                var contentFactory = new FrameworkElementFactory(typeof(ContentPresenter));
+                contentFactory.SetBinding(ContentPresenter.ContentProperty, new Binding("TabHeader") );
+                contentFactory.SetValue(TextBlock.BackgroundProperty, Brushes.Transparent);
+                contentFactory.SetValue(TextBlock.PaddingProperty, new Thickness(5));
 
-                textBlockFactory.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(TextBlock_LeftButtonDown));
-                textBlockFactory.AddHandler(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(TextBlock_MouseMove));
-                textBlockFactory.AddHandler(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(TextBlock_LeftButtonUp));
+                contentFactory.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(TextBlock_LeftButtonDown));
+                contentFactory.AddHandler(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(TextBlock_MouseMove));
+                contentFactory.AddHandler(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(TextBlock_LeftButtonUp));
 
                 var headerPanelFactory = new FrameworkElementFactory(typeof(StackPanel));
                 headerPanelFactory.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
                 headerPanelFactory.AppendChild(iconFactory);
-                headerPanelFactory.AppendChild(textBlockFactory);
+                headerPanelFactory.AppendChild(contentFactory);
 
                 DataTemplate headerTemplate = new DataTemplate() { VisualTree = headerPanelFactory };
 
@@ -129,5 +131,26 @@ namespace HIMTools.Controls
         public int GridColumn { get => Grid.GetColumn(this); set => Grid.SetColumn(this, value); }
         public int GridRow { get => Grid.GetRow(this); set => Grid.SetRow(this, value); }
         public SysCtrl.Dock Dock { get => SysCtrl.DockPanel.GetDock(this); set => SysCtrl.DockPanel.SetDock(this, value); }
+    }
+
+    public class StringITabPageHeaderConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public interface ITabPage
+    {
+        Guid ID { get; }
+        object TabHeader { get; }
+        object Icon { get; }
+        object Content { get; }
     }
 }
