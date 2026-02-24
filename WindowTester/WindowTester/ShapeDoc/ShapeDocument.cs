@@ -296,7 +296,7 @@
                     {
                         Dock = SysCtrl.Dock.Top,
                         ColumnCount = 2,
-                        ColumnDistributions = new float[]{1.0F,2.0F },
+                        ColumnDistributions = new object[]{ "1.0*","2.0*" },
                         Children =
                         {
                             new TextBlock(){Text = "タイトル", VerticalAlignment = System.Windows.VerticalAlignment.Center},

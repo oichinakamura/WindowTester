@@ -1,9 +1,9 @@
-﻿using HIMTools.Interface;
+﻿using HIMTools.Controls;
+using HIMTools.Interface;
 using HIMTools.MapTools;
 using HIMTools.MapTools.RasterContentLib;
 using HIMTools.ShapeDoc;
 using HIMTools.Xml;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -64,21 +64,5 @@ namespace HIMTools.Input
         IMetaElement SetElementValue(string name, string value);
     }
 
-    public class EditDictionary : Dictionary<string, object>
-    {
-        public EditDictionary(INotifyPropertySet owner)
-        {
-            Owner = owner;
-        }
-        private INotifyPropertySet Owner;
-        public new object this[string Key]
-        {
-            get => base[Key];
-            set
-            {
-                base[Key] = value;
-                Owner.SendPropertyChanged($"Values[{Key}]");
-            }
-        }
-    }
+    
 }

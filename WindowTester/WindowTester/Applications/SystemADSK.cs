@@ -1,10 +1,10 @@
-﻿namespace HIMTools
+﻿namespace HIMTools.Applications
 {
     using HIMTools.AppSystem;
     using HIMTools.Xml;
     using System.Xml.Linq;
 
-    public class SystemADSK : XeDocument
+    public partial class SystemADSK : XeDocument
     {
         protected string FilePath = "System.Config";
 
@@ -16,6 +16,8 @@
         {
             return this.CreateElement(name.LocalName);
         }
+
+
         public override IMetaElement CreateElement(string name)
         {
             switch (name)

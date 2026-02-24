@@ -3,6 +3,7 @@ namespace HIMTools.MapTools
 {
     using HIMTools.Controls;
     using HIMTools.Input;
+    using HIMTools.Interface;
     using HIMTools.MapTools.MapControls.RasterView;
     using System;
     using System.Windows;
@@ -74,6 +75,8 @@ namespace HIMTools.MapTools
             }
         }
 
+        public IOperationTarget ActiveOperationTarget { get ; set; }
+
         public void MapRefresh()
         {
             Control.SetMapDrawImage();
@@ -83,7 +86,7 @@ namespace HIMTools.MapTools
 
 
 
-    public interface IMapViewer
+    public partial interface IMapViewer
     {
         RasterContentControl BaseRasterLayer { get; set; }
         IVisualLayerCollection VisualLayerCollection { get; }
@@ -104,7 +107,7 @@ namespace HIMTools.MapTools
 
         public Guid ID { get; } = Guid.NewGuid();
 
-        public object TabHeader => "地図zzz";
+        public object TabHeader => "地図";
     }
 
 }

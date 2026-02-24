@@ -40,6 +40,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,11 +57,17 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Applications\SystemADSK.cs">
+      <Link>Common\Applications\SystemADSK.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\Canvas.cs">
       <Link>Common\Controls\Canvas.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\ControlsRelocation.cs">
-      <Link>Common\Controls\ControlsRelocation.cs</Link>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\Control.cs">
+      <Link>Common\Controls\Control.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\HTreeView.cs">
+      <Link>Common\Controls\HTreeView.cs</Link>
     </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\IWPFControls.cs">
       <Link>Common\Controls\IWPFControls.cs</Link>
@@ -69,17 +78,89 @@
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\StatusBar.cs">
       <Link>Common\Controls\StatusBar.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\DBManSrv\DBManServer.cs">
+      <Link>Common\DBManSrv\DBManServer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\DBManSrv\DBSourceInfo.cs">
+      <Link>Common\DBManSrv\DBSourceInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Dialog\DialogInputBox.cs">
+      <Link>Common\Dialog\DialogInputBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Fonts\Fonts.cs">
+      <Link>Common\Fonts\Fonts.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\HTTP\HTTPClient.cs">
       <Link>Common\HTTP\HTTPClient.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Interface\IHierarchicalContextMenuItem.cs">
+      <Link>Common\Interface\IHierarchicalContextMenuItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\IO\MessageBox.cs">
+      <Link>Common\IO\MessageBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\MapTools\IMapViewer.cs">
+      <Link>Common\MapTools\IMapViewer.cs</Link>
     </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\MapTools\RasterContentLib\RasterContentControl.cs">
       <Link>Common\MapTools\RasterContentControl.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\OperationTargets\OperationTargetExt.cs">
+      <Link>Common\OperationTargets\OperationTargetExt.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\OperationTargets\SubTarget.cs">
+      <Link>Common\OperationTargets\SubTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\SharedObjects\SharedCommon.cs">
+      <Link>Common\SharedObjects\SharedCommon.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\SharedObjects\SharedCommonShapes.cs">
+      <Link>Common\SharedObjects\SharedCommonShapes.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Users\OrganizationMap.cs">
+      <Link>Common\Users\OrganizationMap.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Windows\MainPanel.cs">
       <Link>Common\Windows\MainPanel.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Xml\CustomizableZML.cs">
+      <Link>Common\Xml\CustomizableZML.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Xml\DML\DMLDocument.cs">
+      <Link>Common\Xml\DML\DMLDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Xml\XeDocument.cs">
+      <Link>Common\Xml\XeDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Xml\XmlDocument.cs">
+      <Link>Common\Xml\XmlDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Xml\ZML\ZMLDocument.cs">
+      <Link>Common\Xml\ZML\ZMLDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\DBManSrv\DBsourceInfo.cs">
+      <Link>LIB\DBManSrv\DBsourceInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Extentions\FileSystemExtentions.cs">
+      <Link>LIB\Extentions\FileSystemExtentions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Extentions\IObjectBase.cs">
+      <Link>LIB\Interface\IObjectBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Interface\ICustomerConfig.cs">
+      <Link>LIB\Interface\ICustomerConfig.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Interface\INotifyPropertySet.cs">
       <Link>LIB\Interface\INotifyPropertySet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Log.cs">
+      <Link>LIB\Log.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Users\OrganizationMap.cs">
+      <Link>LIB\Users\OrganizationMap.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Xml\DML\DMLDocument.cs">
+      <Link>LIB\Xml\DML\DMLDocument.cs</Link>
     </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Xml\IMetaElement.cs">
       <Link>LIB\Xml\IMetaElement.cs</Link>
@@ -87,10 +168,12 @@
     <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Xml\XeDocument.cs">
       <Link>LIB\Xml\XeDocument.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Xml\ZML\ZMLDocument.cs">
+      <Link>LIB\Xml\ZML\ZMLDocument.cs</Link>
+    </Compile>
     <Compile Include="Applications\ApplicationBase.cs" />
     <Compile Include="Applications\ApplicationCollection.cs" />
     <Compile Include="AppSystem\SystemConfig.cs" />
-    <Compile Include="Common\Controls\Border.cs" />
     <Compile Include="Common\Controls\Button.cs" />
     <Compile Include="Common\Controls\ComboBox.cs" />
     <Compile Include="Common\Controls\DataGrid.cs" />
@@ -99,15 +182,18 @@
     <Compile Include="Common\Controls\ListView.cs" />
     <Compile Include="Common\Controls\ScrollBar.cs" />
     <Compile Include="Common\Controls\StackPanel.cs" />
-    <Compile Include="Common\Controls\TextBlock.cs" />
     <Compile Include="Controls\Canvas.cs" />
     <Compile Include="Controls\DockPanel.cs" />
     <Compile Include="Controls\Grid.cs" />
+    <Compile Include="Controls\RichTextBox.cs" />
     <Compile Include="Controls\ScrollBar.cs" />
     <Compile Include="Controls\TabControl.cs" />
-    <Compile Include="Controls\TextBox.cs" />
+    <Compile Include="DBManSrv\DBManServer.cs" />
+    <Compile Include="DBManSrv\DBSourceInfo.cs" />
     <Compile Include="Input\InputController.cs" />
     <Compile Include="Interface\IOperationTarget.cs" />
+    <Compile Include="Interface\ISystemAD.cs" />
+    <Compile Include="LIB\Extentions\StringExtentions.cs" />
     <Compile Include="MapTools\CursorModePanel.cs" />
     <Compile Include="MapTools\MapControl.cs" />
     <Compile Include="MapTools\MapViewer.cs" />
@@ -117,13 +203,15 @@
     <Compile Include="MapTools\VisualLayerCollection.cs" />
     <Compile Include="ShapeDoc\ShapeDocument.cs" />
     <Compile Include="SharedObjects\ApplicationTOOL001.cs" />
+    <Compile Include="SharedObjects\SharedCommonShapes.cs" />
     <Compile Include="SharedObjects\SharedOperationTarget.cs" />
-    <Compile Include="SystemADSK.cs" />
-    <Compile Include="AppSystem\SystemAD.cs" />
+    <Compile Include="Applications\SystemADSK.cs" />
+    <Compile Include="AppSystem\CSystemAD.cs" />
+    <Compile Include="Users\OrganizationMap.cs" />
     <Compile Include="Windows\MainPanel.cs" />
     <Compile Include="Windows\Ribbons\RibbonContainer.cs" />
-    <Compile Include="Windows\TabSystem\ITabPages.cs" />
     <Compile Include="Controls\QuadTabControl.cs" />
+    <Compile Include="Windows\TabSystem\Class1.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

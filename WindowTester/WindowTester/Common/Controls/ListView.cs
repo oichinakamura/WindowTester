@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIMTools.Controls
 {
@@ -15,7 +10,7 @@ namespace HIMTools.Controls
     using System.Windows.Input;
     using SysCtrl = System.Windows.Controls;
 
-    public class ListView : SysCtrl.ListView
+    public partial class ListView : SysCtrl.ListView
     {
         private IListViewOwner listViewOwner;
 
@@ -85,8 +80,6 @@ namespace HIMTools.Controls
                     this.ItemsSource = null;
             }
         }
-
-        public SysCtrl.Dock Dock { get => DockPanel.GetDock(this); set => DockPanel.SetDock(this, value); }
     }
     public interface IListViewOwner : INotifyCollectionChanged, INotifyPropertyChanged
     {

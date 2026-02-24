@@ -10,11 +10,15 @@ namespace HIMTools.AppSystem
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Windows.Input;
+    using System.Windows.Data;
+    using HIMTools.DBManSrv;
+    using HIMTools.Interface;
 
-    internal class SystemConfigRoot : TabPageElement, ICommand
+    internal class SystemConfigRoot : TabPageElement, INotifyPropertySet, ICommand
     {
         public SystemConfigRoot() : base("SystemConfig")
         {
+            Values = new EditDictionary(this);
         }
 
         public override object Header => "SystemConfig";
@@ -37,10 +41,22 @@ namespace HIMTools.AppSystem
                                 new Button(){ Content="新規",Command=this,CommandParameter="新規" }
                             }
                         },
-                        new TextBlock
+                        new GridLayoutPanel()
                         {
                             Dock = SysCtrl.Dock.Top,
-                            Text = "System Configurations go here.",
+                            ColumnCount = 3,
+                            ColumnDistributions = new object[] { "0.5*", "*", "0.5*"},
+                            Children = {
+                                new TextBlock{ Text = "Entry" },
+                                new ComboBox{
+                                    DisplayMemberPath = "Header",
+                                    ItemsSourceBinding = new Binding("Entries"){ Source = SystemAD.SysAD },
+                                    Bindings = {
+                                        BindingTuple.Create(Property:ComboBox.SelectedItemProperty, Path:"SelectedEntry", Source:this,UpdateSourceTrigger:UpdateSourceTrigger.PropertyChanged)
+                                    }
+                                },
+                                new Button{ Content="開く", Command = this, CommandParameter = "Entryを開く" }
+                            },
                             Margin = new System.Windows.Thickness(10)
                         },
                         new ListView
@@ -55,6 +71,8 @@ namespace HIMTools.AppSystem
                 return container;
             }
         }
+
+        public IEntry SelectedEntry { get => Values[nameof(SelectedEntry)] as IEntry; set => Values.Add(nameof(SelectedEntry), value); }
         public UsedFileCollection UsedFiles
         {
             get
@@ -66,6 +84,8 @@ namespace HIMTools.AppSystem
             }
         }
         public event EventHandler CanExecuteChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         public bool CanExecute(object parameter) => true;
 
@@ -79,17 +99,27 @@ namespace HIMTools.AppSystem
                         if (saveFileDialog.ShowDialog() == true)
                         {
                             var newDoc = new ShapeDoc.ShapeDocument(new System.IO.FileInfo(saveFileDialog.FileName));
-                         
+
                             if (newDoc != null)
                             {
                                 var newFile = UsedFiles.AddUsedFile(saveFileDialog.FileName);
-                                (OwnerDocument as SystemADSK)?.Save();
+                                (OwnerDocument as CSystemAD)?.Save();
                             }
                         }
                         break;
                     }
+                case "Entryを開く":
+                    if (SelectedEntry != null)
+                        if (Values.TryGet<IEntry>(nameof(SelectedEntry), out IEntry result))
+                        {
+                            SystemAD.SysAD.CurrentEntry = SelectedEntry;
+                            SystemAD.SysAD.QuadTabPages.R1.Add<IEntry>(result, true);
+                        }
+                    break;
             }
         }
+        public EditDictionary Values { get; }
+        public void SendPropertyChanged(params string[] propertyNames) { foreach (string propertyName in propertyNames) PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
     }
 
     public class UsedFileCollection : XeElement, IListViewOwner
@@ -146,7 +176,7 @@ namespace HIMTools.AppSystem
                 shapeDoc.ID = ID;
                 Program.SysAD.Tool001.OperationTargets.Add(shapeDoc);
                 Program.SysAD.Applications.CurrentTarget = shapeDoc;
-                Program.SysAD.QuadTabPages.R1.Add<ITabPage>(shapeDoc,true);
+                Program.SysAD.QuadTabPages.R1.Add<ITabPage>(shapeDoc, true);
                 Program.SysAD.MapViewer.MapRefresh();
             }
         }

@@ -100,6 +100,14 @@
             else if (R2.Contains(tabPage)) return true;
             else return false;
         }
+        public bool Contains(ITabPage tabPage, out TabPageCollection ParenCollection)
+        {
+            if (L1.Contains(tabPage)) { ParenCollection = L1; return true; }
+            else if (R1.Contains(tabPage)) { ParenCollection = R1; return true; }
+            else if (L2.Contains(tabPage)) { ParenCollection = L2; return true; }
+            else if (R2.Contains(tabPage)) { ParenCollection = R2; return true; }
+            else { ParenCollection = null; return false; }
+        }
         public bool Contains(Guid id)
         {
             if (L1.Contains(id)) return true;
@@ -108,13 +116,20 @@
             else if (R2.Contains(id)) return true;
             else return false;
         }
-        public bool Contains(Guid id, out TabPageCollection HasCollection)
+        public bool Contains(Guid id, out TabPageCollection ParenCollection)
         {
-            if (L1.Contains(id)) { HasCollection = L1; return true; }
-            else if (R1.Contains(id)) { HasCollection = R1; return true; }
-            else if (L2.Contains(id)) { HasCollection = L2; return true; }
-            else if (R2.Contains(id)) { HasCollection = L2; return true; }
-            else { HasCollection = null; return false; }
+            if (L1.Contains(id)) { ParenCollection = L1; return true; }
+            else if (R1.Contains(id)) { ParenCollection = R1; return true; }
+            else if (L2.Contains(id)) { ParenCollection = L2; return true; }
+            else if (R2.Contains(id)) { ParenCollection = L2; return true; }
+            else { ParenCollection = null; return false; }
+        }
+        public void Remove(ITabPage tabPage)
+        {
+            if (L1.Contains(tabPage)) L1.Remove(tabPage); 
+            if (R1.Contains(tabPage)) R1.Remove(tabPage);
+            if (L2.Contains(tabPage)) L2.Remove(tabPage);
+            if (R2.Contains(tabPage)) R2.Remove(tabPage);
         }
 
 

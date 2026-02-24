@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -152,5 +151,6 @@ namespace HIMTools.Controls
         object TabHeader { get; }
         object Icon { get; }
         object Content { get; }
+        //void Actived();
     }
 }

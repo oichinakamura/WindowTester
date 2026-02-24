@@ -10,18 +10,31 @@ namespace HIMTools.Controls
 
         }
 
-        public float[] ColumnDistributions
+        public object[] ColumnDistributions
         {
             get => null;
             set
             {
                 for (int n = 0; n < value.Length; n++)
-                    if (ColumnDefinitions.Count > n && value[n] != 0)
+                    if (ColumnDefinitions.Count > n)
                     {
-                        if (value[n] > 0)
-                            ColumnDefinitions[n].Width = new GridLength(value[n], GridUnitType.Star);
-                        else
-                            ColumnDefinitions[n].Width = GridLength.Auto;
+                        switch (value[n])
+                        {
+                            case float width:
+                                if (width > 0)
+                                    ColumnDefinitions[n].Width = new GridLength(width, GridUnitType.Star);
+                                else
+                                    ColumnDefinitions[n].Width = GridLength.Auto;
+                                break;
+                            case "Auto": ColumnDefinitions[n].Width = GridLength.Auto; break;
+                            case "*": ColumnDefinitions[n].Width = new GridLength(1.0, GridUnitType.Star); break;
+                            case string star:
+                                if (star.EndsWith("*") && float.TryParse(star.Replace("*", ""), out float floatValue))
+                                    ColumnDefinitions[n].Width = new GridLength(floatValue, GridUnitType.Star);
+                                else if (float.TryParse(star.Replace("*", ""), out float floatRValue))
+                                    ColumnDefinitions[n].Width = new GridLength(floatRValue, GridUnitType.Pixel);
+                                break;
+                        }
                     }
                     else
                         return;
