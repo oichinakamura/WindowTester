@@ -31,7 +31,7 @@ namespace HIMTools.Controls
 
 
                 var contentFactory = new FrameworkElementFactory(typeof(ContentPresenter));
-                contentFactory.SetBinding(ContentPresenter.ContentProperty, new Binding("Title") );
+                contentFactory.SetBinding(ContentPresenter.ContentProperty, new Binding("Title"));
                 contentFactory.SetValue(TextBlock.BackgroundProperty, Brushes.Transparent);
                 contentFactory.SetValue(TextBlock.PaddingProperty, new Thickness(5));
 
@@ -145,7 +145,7 @@ namespace HIMTools.Controls
         }
     }
 
-    public interface ITabPage
+    public partial interface ITabPage
     {
         Guid ID { get; }
         object Title { get; }
