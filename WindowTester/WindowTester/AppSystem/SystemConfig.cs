@@ -22,7 +22,7 @@ namespace HIMTools.AppSystem
         }
 
         public override object Header => "SystemConfig";
-        public override object TabHeader => "SystemConfig";
+        public override object Title => "SystemConfig";
         public override object Icon => "≡";
 
         public override object Content
@@ -192,6 +192,6 @@ namespace HIMTools.AppSystem
         public virtual object Icon => throw new NotImplementedException();
         public virtual object Content { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public virtual object TabHeader => throw new NotImplementedException();
+        public virtual object Title => throw new NotImplementedException();
     }
 }

@@ -93,7 +93,7 @@
 
         public Guid ID { get; } = Guid.NewGuid();
 
-        public object TabHeader => Header;
+        public object Title => Header;
         public string Source => SystemAD.SysAD.DBSourceInfo.OuterFormatedXml;
 
         public void Actived()

@@ -12,7 +12,7 @@
     {
         public IInputController DefaultController => throw new System.NotImplementedException();
 
-        public object TabHeader => Title;
+
         public object Icon => "😬";
 
         public object Content => new DataGrid()
@@ -25,6 +25,8 @@
         };
 
         public IEnumerable Children => ChildNodes;
+
+        object ITabPage.Title => Title;
 
         public void Draw(IVisualLayerCollection visualLayers)
         {

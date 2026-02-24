@@ -42,7 +42,7 @@
         public string FilePath { get; private set; }
 
         public object Header => FilePath.IndexOf('\\') > 0 ? FilePath.Substring(FilePath.LastIndexOf('\\') + 1) : FilePath;
-        public object TabHeader => Header;
+        public object Title => Header;
         public object Icon => "📒";
         private object content;
 
@@ -247,7 +247,7 @@
         public override Guid ID { get => HasAttribute("ID") ? base.ID : CreateID(); set => base.ID = value; }
         public Guid CreateID() { SetAttribute("ID", Guid.NewGuid()); return base.ID; }
         public object Header => Title;
-        public object TabHeader => Title;
+
 
         public object Icon => Type switch
         {
@@ -369,6 +369,8 @@
 
         protected IInputController inputController;
         public string ButtonMode { get; set; } = "🖊";
+
+        object ITabPage.Title => Title;
 
         public event EventHandler CanExecuteChanged;
         public event PropertyChangedEventHandler PropertyChanged;

@@ -36,8 +36,10 @@ namespace HIMTools.DBManSrv
     {
         public Entry(string name) : base(name)
         {
+            
         }
 
+        public object Title => EntryName;
         public Users.OrganizationMap OrganizationMap
         {
             get
@@ -60,7 +62,6 @@ namespace HIMTools.DBManSrv
             }
         }
         public string Header => GetAttribute("Name");
-        public object TabHeader => GetAttribute("Name");
 
         public object Icon => "⚒️";
         public object Content => new DockPanel
@@ -108,7 +109,7 @@ namespace HIMTools.DBManSrv
         }
     }
 
-    public partial interface IEntry : ITabPage
+    public partial interface IEntry : ITabPage // WindowTester専用
     {
 
     }

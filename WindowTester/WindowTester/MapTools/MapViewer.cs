@@ -107,7 +107,7 @@ namespace HIMTools.MapTools
 
         public Guid ID { get; } = Guid.NewGuid();
 
-        public object TabHeader => "地図";
+        public object Title => "地図";
     }
 
 }
