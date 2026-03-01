@@ -183,7 +183,9 @@ namespace HIMTools.Users
             OrganizationMap = organizationMap;
         }
         protected OrganizationMap OrganizationMap;
-        public override bool CanExecute(object owner, object parameter)
+
+
+        public override bool CanExecute(object owner, object[] parameter)
         {
             return true;
         }
@@ -215,5 +217,6 @@ namespace HIMTools.Users
 
             }
         }
+
     }
 }

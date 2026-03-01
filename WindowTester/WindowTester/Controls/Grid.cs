@@ -2,7 +2,7 @@
 {
     using SysCtrl = System.Windows.Controls;
     using SysWin = System.Windows;
-    public class Grid : SysCtrl.Grid
+    public partial class Grid : SysCtrl.Grid
     {
 
         public object[] RowSplit
@@ -23,9 +23,7 @@
             }
         }
 
-        public int GridColumn { get => Grid.GetColumn(this); set => Grid.SetColumn(this, value); }
-        public int GridRow { get => Grid.GetRow(this); set => Grid.SetRow(this, value); }
-        public SysCtrl.Dock Dock { get => SysCtrl.DockPanel.GetDock(this); set => SysCtrl.DockPanel.SetDock(this, value); }
+    
     }
 
     public class GridSplitter : SysCtrl.GridSplitter

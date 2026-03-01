@@ -63,7 +63,7 @@ namespace HIMTools.MapTools
 
         public IVisualLayerCollection VisualLayerCollection { get; } = new VisualLayerCollection();
 
-
+  
         private IInputController inputController;
         public IInputController InputController
         {
@@ -82,6 +82,10 @@ namespace HIMTools.MapTools
             Control.SetMapDrawImage();
         }
 
+        public void Goto(double X, double Y)
+        {
+           
+        }
     }
 
 
@@ -92,6 +96,7 @@ namespace HIMTools.MapTools
         IVisualLayerCollection VisualLayerCollection { get; }
         void MapRefresh();
         IInputController InputController { get; set; }
+        void Goto(double X,double Y);
     }
 
     public partial class MapViewer : ITabPage

@@ -2,13 +2,8 @@
 {
     using System.Windows;
     using SysCtrl = System.Windows.Controls;
-    public class DataGrid : SysCtrl.DataGrid
+    public partial class DataGrid : SysCtrl.DataGrid
     {
-        public DataGrid()
-        {
-            Bindings = new BindingCollection(this);
-        }
-
         protected override void OnMouseDoubleClick(System.Windows.Input.MouseButtonEventArgs e)
         {
             if (SelectedItem is IDataGridItem dataGridItem)
@@ -17,9 +12,6 @@
             }
             base.OnMouseDoubleClick(e);
         }
-        public SysCtrl.Dock Dock { get => DockPanel.GetDock(this); set => DockPanel.SetDock(this, value); }
-
-        public BindingCollection Bindings { get; }
     }
 
     public interface IDataGridItem

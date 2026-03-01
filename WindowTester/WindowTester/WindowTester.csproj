@@ -66,6 +66,9 @@
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\Control.cs">
       <Link>Common\Controls\Control.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\GridLayoutPanel.cs">
+      <Link>Common\Controls\GridLayoutPanel.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Controls\HTreeView.cs">
       <Link>Common\Controls\HTreeView.cs</Link>
     </Compile>
@@ -99,8 +102,14 @@
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\IO\MessageBox.cs">
       <Link>Common\IO\MessageBox.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\MapTools\Data\DrawCondition.cs">
+      <Link>Common\MapTools\Data\DrawCondition.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\MapTools\IMapViewer.cs">
       <Link>Common\MapTools\IMapViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\MapTools\MapContrlos\VisualLayerCollection.cs">
+      <Link>Common\MapTools\MapControls\VisualLayerCollection.cs</Link>
     </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\MapTools\RasterContentLib\RasterContentControl.cs">
       <Link>Common\MapTools\RasterContentControl.cs</Link>
@@ -135,11 +144,17 @@
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Xml\XmlDocument.cs">
       <Link>Common\Xml\XmlDocument.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Xml\ZML\ZMLDataSet.cs">
+      <Link>Common\Xml\ZML\ZMLDataSet.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\Common\Xml\ZML\ZMLDocument.cs">
       <Link>Common\Xml\ZML\ZMLDocument.cs</Link>
     </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\DBManSrv\DBsourceInfo.cs">
       <Link>LIB\DBManSrv\DBsourceInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Extentions\DoubleExtentions.cs">
+      <Link>LIB\Extentions\DoubleExtentions.cs</Link>
     </Compile>
     <Compile Include="..\..\..\HIMCommon2025LTS.git\LIB\HIMTools\Extentions\FileSystemExtentions.cs">
       <Link>LIB\Extentions\FileSystemExtentions.cs</Link>
@@ -177,8 +192,6 @@
     <Compile Include="Common\Controls\Button.cs" />
     <Compile Include="Common\Controls\ComboBox.cs" />
     <Compile Include="Common\Controls\DataGrid.cs" />
-    <Compile Include="Common\Controls\GridLayoutPanel.cs" />
-    <Compile Include="Common\Controls\HasEventUIElementCollection.cs" />
     <Compile Include="Common\Controls\ListView.cs" />
     <Compile Include="Common\Controls\ScrollBar.cs" />
     <Compile Include="Common\Controls\StackPanel.cs" />
@@ -195,6 +208,7 @@
     <Compile Include="Interface\ISystemAD.cs" />
     <Compile Include="LIB\Extentions\StringExtentions.cs" />
     <Compile Include="MapTools\CursorModePanel.cs" />
+    <Compile Include="MapTools\Data\DrawCondition.cs" />
     <Compile Include="MapTools\MapControl.cs" />
     <Compile Include="MapTools\MapViewer.cs" />
     <Compile Include="MapTools\OperationTarget.cs" />

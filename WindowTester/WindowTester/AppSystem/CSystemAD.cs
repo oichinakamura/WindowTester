@@ -9,6 +9,7 @@
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Windows.Input;
     using SysWin = System.Windows;
 
     public class CSystemAD : SystemADSK, ISystemAD, IQuadTabOwner, INotifyPropertySet
@@ -74,31 +75,62 @@
         public void SendPropertyChanged(params string[] propertyNames) { foreach (string propertyName in propertyNames) PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
     }
 
-    public class TabDummy : ITabPage
+    public class TabDummy : ITabPage, ICommand, INotifyPropertyChanged
     {
         public object Header => "DBSourceInfo";
         public object Icon => "�";
         public object Content => new DockPanel()
-                    {
-                        Children ={
-                            new RichTextBox() {
-                                Bindings = {
-                                    BindingTuple.Create(Property: RichTextBox.TextProperty, Path:"Source",Source:this, Mode:SysWin.Data.BindingMode.OneWay)
-                                },
-                                HorizontalScrollBarVisibility = SysWin.Controls.ScrollBarVisibility.Visible,
-                                VerticalScrollBarVisibility = SysWin.Controls.ScrollBarVisibility.Visible,
+        {
+            Children ={
+                        new StackPanel() {
+                            Children =
+                            {
+                                new Button(){ Content="Guid", Command=this,CommandParameter="Guid"  },
+                                new TextBox(){
+                                    Bindings={
+                                        BindingTuple.Create(Property:TextBox.TextProperty,Path:"ResultText",Source:this)
+                                    }
+                                }
                             }
+                        },
+                        new RichTextBox() {
+                            Bindings = {
+                                BindingTuple.Create(Property: RichTextBox.TextProperty, Path:"Source",Source:this, Mode:SysWin.Data.BindingMode.OneWay)
+                            },
+                            HorizontalScrollBarVisibility = SysWin.Controls.ScrollBarVisibility.Visible,
+                            VerticalScrollBarVisibility = SysWin.Controls.ScrollBarVisibility.Visible,
                         }
-                    };
+                    }
+        };
 
         public Guid ID { get; } = Guid.NewGuid();
 
         public object Title => Header;
         public string Source => SystemAD.SysAD.DBSourceInfo.OuterFormatedXml;
 
+        public event EventHandler CanExecuteChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+
         public void Actived()
         {
             throw new NotImplementedException();
+        }
+
+        public bool CanExecute(object parameter) => true;
+
+        public string ResultText { get; set; }
+
+        public void Execute(object parameter)
+        {
+            switch (parameter)
+            {
+                case "Guid":
+                    ResultText = $"{Guid.NewGuid()}";
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ResultText"));
+                    break;
+            }
         }
     }
 }

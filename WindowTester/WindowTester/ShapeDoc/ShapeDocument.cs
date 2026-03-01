@@ -248,7 +248,6 @@
         public Guid CreateID() { SetAttribute("ID", Guid.NewGuid()); return base.ID; }
         public object Header => Title;
 
-
         public object Icon => Type switch
         {
             "ラベル" => "🏷️",
@@ -370,7 +369,8 @@
         protected IInputController inputController;
         public string ButtonMode { get; set; } = "🖊";
 
-        object ITabPage.Title => Title;
+
+        object ITabContent.Title => Title;
 
         public event EventHandler CanExecuteChanged;
         public event PropertyChangedEventHandler PropertyChanged;

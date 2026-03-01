@@ -145,12 +145,9 @@ namespace HIMTools.Controls
         }
     }
 
-    public partial interface ITabPage
+    public partial interface ITabPage: ITabContent
     {
         Guid ID { get; }
-        object Title { get; }
         object Icon { get; }
-        object Content { get; }
-        //void Actived();
     }
 }
